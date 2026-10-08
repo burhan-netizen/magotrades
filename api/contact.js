@@ -4,18 +4,7 @@
 const esc = s => String(s || '').slice(0, 4000).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
 module.exports = async (req, res) => {
-  if (req.method !== 'POST') {
-    // TEMPORARY setup check: open /api/contact in a browser to see which key Vercel is using (only a few characters are shown)
-    const raw = process.env.RESEND_API_KEY, k = (raw || '').trim();
-    return res.status(200).json({
-      keyFound: !!raw,
-      keyStartsWith: k.slice(0, 7),
-      keyEndsWith: k.slice(-3),
-      keyLength: k.length,
-      looksRight: /^re_[A-Za-z0-9_]{20,}$/.test(k),
-      otherResendNamedVariables: Object.keys(process.env).filter(n => /resend|trades|site_key/i.test(n) && n !== 'RESEND_API_KEY')
-    });
-  }
+  if (req.method !== 'POST') { res.setHeader('Allow', 'POST'); return res.status(405).json({ ok: false }); }
   let b = req.body || {};
   if (typeof b === 'string') { try { b = JSON.parse(b) } catch (e) { b = {} } }
 
@@ -41,7 +30,7 @@ module.exports = async (req, res) => {
         html, text
       })
     });
-    if (!r.ok) { const k = process.env.RESEND_API_KEY.trim(); console.error('Resend error', r.status, await r.text(), '| key check: starts', k.slice(0, 6), 'ends', k.slice(-3), 'length', k.length); return res.status(502).json({ ok: false }); }
+    if (!r.ok) { console.error('Resend error', r.status, await r.text()); return res.status(502).json({ ok: false }); }
     return res.status(200).json({ ok: true });
   } catch (e) { console.error(e); return res.status(502).json({ ok: false }); }
 };
