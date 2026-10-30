@@ -48,6 +48,11 @@
       "source": "/services/ai-receptionist/",
       "destination": "/services/",
       "permanent": true
+    },
+    {
+      "source": "/work/britosconcrete/",
+      "destination": "/work/",
+      "permanent": true
     }
   ]
 }
