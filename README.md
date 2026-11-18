@@ -26,4 +26,4 @@ A hidden field quietly drops most spam bots.
 - /trades/ plus roofers, plumbers, electricians, hvac, concreters, builders, landscapers, excavation, painters, tilers, glaziers, handymen
 - Country pages with hreflang: /australia/, /usa/, /uk/, /canada/, /new-zealand/
 
-Prices show automatically in the visitor's local money based on where they are (Australia $1,149, USA $799, UK £599, Canada $1,149, New Zealand $1,449). Visitors only ever see their own price; anyone outside these five countries sees the USA price. Country pages always show that country's price.
+Four packages (Launch, Growth, Scale, Commerce). Prices show automatically in the visitor's local money based on where they are; Launch is Australia $1,449, USA $999, UK £749, Canada $1,399, New Zealand $1,799. All prices live in the `f` map in assets/site.js (keys b, g, s, c for the packages, h for the hourly rate). Visitors only ever see their own price; anyone outside these five countries sees the USA price. Country pages always show that country's price.
